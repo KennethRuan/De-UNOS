@@ -1,6 +1,7 @@
 import reflex as rx
 from frontend.components.internal_template import internal_template
 from frontend.components.transitions import fade_in
+from requests import post
 
 
 class DonorState(rx.State):
@@ -14,6 +15,7 @@ class DonorState(rx.State):
             self.modal_open = True
         # after hitting submit button all data is in the form_data dictionary
         # can use this to add to blockchain
+        data = post("http://localhost:3051/api/add-donor", json=form_data)
 
 
 def register_donor():

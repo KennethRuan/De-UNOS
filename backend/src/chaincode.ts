@@ -120,14 +120,16 @@ export async function getDonation(
  */
 export async function createPatient(
   contract: Contract,
-  patientId: string,
+  id: string,
   age: number,
-  height: number,
   bloodType: string,
-  pediatricStatus: string,
+  hlaB27Antibodies: string,
+  height: number,
   location: string,
   meldScore: number,
-  hlaB27Antibodies: string
+  organNeeded: string,
+  pediatricStatus: string,
+  terraWearableId: string
 ): Promise<void> {
   console.log(
     "\n--> Submit Transaction: CreatePatient, creates new patient record with provide details"
@@ -135,20 +137,20 @@ export async function createPatient(
 
   await contract.submitTransaction(
     "CreatePatient",
-    patientId,
+    id,
     age.toString(),
     height.toString(),
     bloodType,
     pediatricStatus,
     location,
     meldScore.toString(),
-    hlaB27Antibodies
+    organNeeded,
+    pediatricStatus,
+    hlaB27Antibodies,
+    terraWearableId
   );
 
-  console.log(
-    "*** Transaction committed successfully for Patient ID: ",
-    patientId
-  );
+  console.log("*** Transaction committed successfully for Patient ID: ", id);
 }
 
 /**
@@ -170,7 +172,7 @@ export async function createDonor(
   );
 
   await contract.submitTransaction(
-    "CreateDonor",
+    "createDonor",
     donorId,
     organ,
     age.toString(),

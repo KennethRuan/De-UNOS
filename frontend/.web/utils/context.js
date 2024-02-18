@@ -57,15 +57,21 @@ export function StateProvider({ children }) {
   const [state, dispatch_state] = useReducer(applyDelta, initialState["state"])
   const [state__register_state, dispatch_state__register_state] = useReducer(applyDelta, initialState["state.register_state"])
   const [state__donor_state, dispatch_state__donor_state] = useReducer(applyDelta, initialState["state.donor_state"])
+<<<<<<< HEAD
+=======
   const [state__data_state, dispatch_state__data_state] = useReducer(applyDelta, initialState["state.data_state"])
   const [state__iter_state, dispatch_state__iter_state] = useReducer(applyDelta, initialState["state.iter_state"])
+>>>>>>> 8bc24d6457fad1c885713b2ffd7a60cade4214e1
   const dispatchers = useMemo(() => {
     return {
       "state": dispatch_state,
       "state.register_state": dispatch_state__register_state,
       "state.donor_state": dispatch_state__donor_state,
+<<<<<<< HEAD
+=======
       "state.data_state": dispatch_state__data_state,
       "state.iter_state": dispatch_state__iter_state,
+>>>>>>> 8bc24d6457fad1c885713b2ffd7a60cade4214e1
     }
   }, [])
 
@@ -73,11 +79,20 @@ export function StateProvider({ children }) {
     <StateContexts.state.Provider value={ state }>
     <StateContexts.state__register_state.Provider value={ state__register_state }>
     <StateContexts.state__donor_state.Provider value={ state__donor_state }>
+<<<<<<< HEAD
+      <DispatchContext.Provider value={dispatchers}>
+        {children}
+      </DispatchContext.Provider>
+    </StateContexts.state__donor_state.Provider>
+    </StateContexts.state__register_state.Provider>
+    </StateContexts.state__data_state.Provider>
+=======
     <StateContexts.state__data_state.Provider value={ state__data_state }>
     <StateContexts.state__iter_state.Provider value={ state__iter_state }>
       <DispatchContext.Provider value={dispatchers}>
         {children}
       </DispatchContext.Provider>
+>>>>>>> 8bc24d6457fad1c885713b2ffd7a60cade4214e1
     </StateContexts.state__iter_state.Provider>
     </StateContexts.state__data_state.Provider>
     </StateContexts.state__donor_state.Provider>
