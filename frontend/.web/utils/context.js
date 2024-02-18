@@ -1,15 +1,15 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
 import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "/utils/state.js"
 
-export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.iter_state": {"route": [{"name": "one", "icon": "heart", "link": "/login"}, {"name": "one", "icon": "heart", "link": "/login"}, {"name": "one", "icon": "heart", "link": "/login"}]}, "state.register_state": {"organ_inputted": false, "searched": false}}
+export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.register_state": {"organ_inputted": false, "searched": false}, "state.iter_state": {"route": [{"name": "one", "icon": "heart", "link": "/login"}, {"name": "one", "icon": "heart", "link": "/login"}, {"name": "one", "icon": "heart", "link": "/login"}]}}
 
 export const ColorModeContext = createContext(null);
 export const UploadFilesContext = createContext(null);
 export const DispatchContext = createContext(null);
 export const StateContexts = {
   state: createContext(null),
-  state__iter_state: createContext(null),
   state__register_state: createContext(null),
+  state__iter_state: createContext(null),
 }
 export const EventLoopContext = createContext(null);
 export const clientStorage = {"cookies": {}, "local_storage": {}}
@@ -53,25 +53,25 @@ export function EventLoopProvider({ children }) {
 
 export function StateProvider({ children }) {
   const [state, dispatch_state] = useReducer(applyDelta, initialState["state"])
-  const [state__iter_state, dispatch_state__iter_state] = useReducer(applyDelta, initialState["state.iter_state"])
   const [state__register_state, dispatch_state__register_state] = useReducer(applyDelta, initialState["state.register_state"])
+  const [state__iter_state, dispatch_state__iter_state] = useReducer(applyDelta, initialState["state.iter_state"])
   const dispatchers = useMemo(() => {
     return {
       "state": dispatch_state,
-      "state.iter_state": dispatch_state__iter_state,
       "state.register_state": dispatch_state__register_state,
+      "state.iter_state": dispatch_state__iter_state,
     }
   }, [])
 
   return (
     <StateContexts.state.Provider value={ state }>
-    <StateContexts.state__iter_state.Provider value={ state__iter_state }>
     <StateContexts.state__register_state.Provider value={ state__register_state }>
+    <StateContexts.state__iter_state.Provider value={ state__iter_state }>
       <DispatchContext.Provider value={dispatchers}>
         {children}
       </DispatchContext.Provider>
-    </StateContexts.state__register_state.Provider>
     </StateContexts.state__iter_state.Provider>
+    </StateContexts.state__register_state.Provider>
     </StateContexts.state.Provider>
   )
 }

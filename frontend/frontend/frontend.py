@@ -38,3 +38,4 @@ app.add_page(index)
 app.add_page(login)
 app.add_page(dashboard)
 app.add_page(register_patient, route="/register-patient")
+

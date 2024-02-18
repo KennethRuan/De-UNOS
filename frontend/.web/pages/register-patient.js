@@ -14,15 +14,6 @@ import NextHead from "next/head"
 
 
 
-export function Textfield__input_4ab8906c8305fb234e7e1f9e73ad4767 () {
-  const state__register_state = useContext(StateContexts.state__register_state)
-
-
-  return (
-    <RadixThemesTextField.Input css={{"cursor": isTrue(((state__register_state.searched) === (true))) ? `not-allowed` : `auto`}} disabled={isTrue(((state__register_state.searched) === (true))) ? true : false} name={`patient_id`} size={`2`} variant={`surface`}/>
-  )
-}
-
 export function Button_dcbd04123d4dc37514170884752ab085 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
   const state__register_state = useContext(StateContexts.state__register_state)
@@ -36,7 +27,74 @@ export function Button_dcbd04123d4dc37514170884752ab085 () {
   )
 }
 
-export function Fragment_e4cb083a63e567f50ecf0c1cbbd7b946 () {
+export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_2fd35f581ac6d709ce2966c88c7c5818 = useCallback((_e) => addEvents([Event("_redirect", {path:`/login`,external:false})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_2fd35f581ac6d709ce2966c88c7c5818} size={`3`} variant={`soft`}>
+  {`Log out`}
+</RadixThemesButton>
+  )
+}
+
+export function Box_ce99669a547baa4edf67d2d8cd289c3c () {
+  const state__iter_state = useContext(StateContexts.state__iter_state)
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+
+  return (
+    <RadixThemesBox css={{"width": "100%"}}>
+  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
+  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
+  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
+  {route["name"]}
+</RadixThemesBox>
+))}
+</RadixThemesBox>
+  )
+}
+
+export function Textfield__input_4ab8906c8305fb234e7e1f9e73ad4767 () {
+  const state__register_state = useContext(StateContexts.state__register_state)
+
+
+  return (
+    <RadixThemesTextField.Input css={{"cursor": isTrue(((state__register_state.searched) === (true))) ? `not-allowed` : `auto`}} disabled={isTrue(((state__register_state.searched) === (true))) ? true : false} name={`patient_id`} size={`2`} variant={`surface`}/>
+  )
+}
+
+export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(connectError !== null) ? (
+  <Fragment>
+  <RadixThemesDialog.Root open={connectError !== null}>
+  <RadixThemesDialog.Content>
+  <RadixThemesDialog.Title>
+  {`Connection Error`}
+</RadixThemesDialog.Title>
+  <RadixThemesText as={`p`}>
+  {`Cannot connect to server: `}
+  {(connectError !== null) ? connectError.message : ''}
+  {`. Check if server is reachable at `}
+  {getBackendURL(env.EVENT).href}
+</RadixThemesText>
+</RadixThemesDialog.Content>
+</RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Fragment_ef2beb56ca90b8d51f8f0643ed7d7237 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
   const state__register_state = useContext(StateContexts.state__register_state)
 
@@ -117,64 +175,6 @@ export function Fragment_e4cb083a63e567f50ecf0c1cbbd7b946 () {
   )
 }
 
-export function Box_d85398544b6feb6d9df4aff43b3bf781 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-  const state__iter_state = useContext(StateContexts.state__iter_state)
-
-
-  return (
-    <RadixThemesBox css={{"width": "100%"}}>
-  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
-  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
-  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
-  {route["name"]}
-</RadixThemesBox>
-))}
-</RadixThemesBox>
-  )
-}
-
-export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_2fd35f581ac6d709ce2966c88c7c5818 = useCallback((_e) => addEvents([Event("_redirect", {path:`/login`,external:false})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_2fd35f581ac6d709ce2966c88c7c5818} size={`3`} variant={`soft`}>
-  {`Log out`}
-</RadixThemesButton>
-  )
-}
-
-export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-
-  return (
-    <Fragment>
-  {isTrue(connectError !== null) ? (
-  <Fragment>
-  <RadixThemesDialog.Root open={connectError !== null}>
-  <RadixThemesDialog.Content>
-  <RadixThemesDialog.Title>
-  {`Connection Error`}
-</RadixThemesDialog.Title>
-  <RadixThemesText as={`p`}>
-  {`Cannot connect to server: `}
-  {(connectError !== null) ? connectError.message : ''}
-  {`. Check if server is reachable at `}
-  {getBackendURL(env.EVENT).href}
-</RadixThemesText>
-</RadixThemesDialog.Content>
-</RadixThemesDialog.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
 export default function Component() {
 
   return (
@@ -191,7 +191,7 @@ export default function Component() {
   <RadixThemesAvatar fallback={`RX`} radius={`full`} src={`/avatar.png`} variant={`solid`}/>
   {`Organ Donor`}
 </RadixThemesBox>
-  <Box_d85398544b6feb6d9df4aff43b3bf781/>
+  <Box_ce99669a547baa4edf67d2d8cd289c3c/>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <Button_fdfb9abde1a99e327c82452dc6a3dd0c/>
 </RadixThemesFlex>
@@ -212,7 +212,7 @@ export default function Component() {
 </RadixThemesBox>
   <Button_dcbd04123d4dc37514170884752ab085/>
 </RadixThemesFlex>
-  <Fragment_e4cb083a63e567f50ecf0c1cbbd7b946/>
+  <Fragment_ef2beb56ca90b8d51f8f0643ed7d7237/>
 </RadixThemesScrollArea>
 </RadixThemesBox>
 </RadixThemesBox>
