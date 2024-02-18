@@ -13,11 +13,13 @@
   "dependencies": {
     "@hyperledger/fabric-gateway": "^1.4.0",
     "express": "^4.18.2",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.19",
+    "@types/uuid": "^9.0.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
