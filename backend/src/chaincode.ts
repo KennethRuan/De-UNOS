@@ -223,7 +223,7 @@ export async function createDonation(
   );
 }
 
-export async function updateDnoation(
+export async function updateDonation(
   contract: Contract,
   donationId: string,
   patientId: string,
