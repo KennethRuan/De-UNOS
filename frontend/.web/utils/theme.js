@@ -1,1 +1,0 @@
-export default {"styles": {"global": {":root": {"*::selection": {"backgroundColor": "#a3cbe8"}}, "body": {"fontFamily": "Montserrat", "fontSize": "16px", "backgroundImage": "radial-gradient(circle, #0078cc, #4a94d6, #77afdf, #a3cbe8, #d1e5f2)"}}}}

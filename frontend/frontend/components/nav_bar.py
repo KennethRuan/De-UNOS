@@ -4,9 +4,9 @@ from frontend.components.nav_item import nav_item
 
 class IterState(rx.State):
     route: list[dict] = [
-        {"name": "one", "icon": "heart", "link": "/login"},
-        {"name": "one", "icon": "heart", "link": "/login"},
-        {"name": "one", "icon": "heart", "link": "/login"},
+        {"name": "Home", "icon": "heart", "link": "/dashboard"},
+        {"name": "Register a patient", "icon": "heart", "link": "/register/patient"},
+        {"name": "Register a donor", "icon": "heart", "link": "/register/donor"},
     ]
 
 
