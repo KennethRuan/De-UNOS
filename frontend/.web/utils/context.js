@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
 import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "/utils/state.js"
 
-export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.iter_state": {"route": [{"name": "one", "icon": "heart", "link": "/login"}, {"name": "one", "icon": "heart", "link": "/login"}, {"name": "one", "icon": "heart", "link": "/login"}]}, "state.data_state": {"data": [[]]}, "state.register_state": {"organ_inputted": false, "searched": false}}
+export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.iter_state": {"route": [{"name": "Home", "icon": "heart", "link": "/dashboard"}, {"name": "Register a patient", "icon": "heart", "link": "/register/patient"}, {"name": "Register a donor", "icon": "heart", "link": "/register/donor"}]}, "state.data_state": {"data": [[]]}, "state.register_state": {"organ_inputted": false, "searched": false, "vitals": {}}, "state.donor_state": {"form_data": {}, "modal_open": false}}
 
 export const ColorModeContext = createContext(null);
 export const UploadFilesContext = createContext(null);
@@ -11,6 +11,7 @@ export const StateContexts = {
   state__iter_state: createContext(null),
   state__data_state: createContext(null),
   state__register_state: createContext(null),
+  state__donor_state: createContext(null),
 }
 export const EventLoopContext = createContext(null);
 export const clientStorage = {"cookies": {}, "local_storage": {}}
@@ -57,12 +58,14 @@ export function StateProvider({ children }) {
   const [state__iter_state, dispatch_state__iter_state] = useReducer(applyDelta, initialState["state.iter_state"])
   const [state__data_state, dispatch_state__data_state] = useReducer(applyDelta, initialState["state.data_state"])
   const [state__register_state, dispatch_state__register_state] = useReducer(applyDelta, initialState["state.register_state"])
+  const [state__donor_state, dispatch_state__donor_state] = useReducer(applyDelta, initialState["state.donor_state"])
   const dispatchers = useMemo(() => {
     return {
       "state": dispatch_state,
       "state.iter_state": dispatch_state__iter_state,
       "state.data_state": dispatch_state__data_state,
       "state.register_state": dispatch_state__register_state,
+      "state.donor_state": dispatch_state__donor_state,
     }
   }, [])
 
@@ -71,9 +74,11 @@ export function StateProvider({ children }) {
     <StateContexts.state__iter_state.Provider value={ state__iter_state }>
     <StateContexts.state__data_state.Provider value={ state__data_state }>
     <StateContexts.state__register_state.Provider value={ state__register_state }>
+    <StateContexts.state__donor_state.Provider value={ state__donor_state }>
       <DispatchContext.Provider value={dispatchers}>
         {children}
       </DispatchContext.Provider>
+    </StateContexts.state__donor_state.Provider>
     </StateContexts.state__register_state.Provider>
     </StateContexts.state__data_state.Provider>
     </StateContexts.state__iter_state.Provider>
