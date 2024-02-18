@@ -19,107 +19,229 @@ export async function initLedger(contract: Contract): Promise<void> {
 /**
  * Evaluate a transaction to query ledger state.
  */
-export async function getAllAssets(contract: Contract): Promise<void> {
+export async function getAllPatients(contract: Contract): Promise<any[]> {
   console.log(
-    "\n--> Evaluate Transaction: GetAllAssets, function returns all the current assets on the ledger"
+    "\n--> Evaluate Transaction: GetAllPatients, function returns all the patient records on the ledger"
   );
 
-  const resultBytes = await contract.evaluateTransaction("GetAllAssets");
+  const resultBytes = await contract.evaluateTransaction("GetAllPatients");
 
   const resultJson = utf8Decoder.decode(resultBytes);
-  const result = JSON.parse(resultJson);
-  console.log("*** Result:", result);
+  const patients = JSON.parse(resultJson);
+  console.log("*** All Patients: ", patients);
+  return patients;
+}
+
+export async function getAllDonors(contract: Contract): Promise<any[]> {
+  console.log(
+    "\n--> Evaluate Transaction: GetAllDonors, function returns all the organ donor on the ledger"
+  );
+
+  const resultBytes = await contract.evaluateTransaction("GetAllDonors");
+
+  const resultJson = utf8Decoder.decode(resultBytes);
+  const donors = JSON.parse(resultJson);
+  console.log("*** All Donors:", donors);
+  return donors;
+}
+
+export async function getAllDonations(
+  contract: Contract,
+  patientId: string
+): Promise<any[]> {
+  console.log(
+    "\n--> Evaluate Transaction: GetAllDonations, function returns all the donations received by the patient"
+  );
+
+  const resultBytes = await contract.evaluateTransaction(
+    "GetAllDonations",
+    patientId
+  );
+
+  const resultJson = utf8Decoder.decode(resultBytes);
+  const donations = JSON.parse(resultJson);
+  console.log("*** All Donations: ", donations);
+  return donations;
+}
+
+export async function getPatient(
+  contract: Contract,
+  patientId: string
+): Promise<void> {
+  console.log(
+    "\n--> Evaluate Transaction: GetPatient, function returns the patient record with the provided ID"
+  );
+
+  const resultBytes = await contract.evaluateTransaction(
+    "GetPatient",
+    patientId
+  );
+
+  const resultJson = utf8Decoder.decode(resultBytes);
+  const patient = JSON.parse(resultJson);
+  console.log("*** Patient: ", patient);
+}
+
+export async function getDonor(
+  contract: Contract,
+  donorId: string
+): Promise<void> {
+  console.log(
+    "\n--> Evaluate Transaction: GetDonor, function returns the donor record with the provided ID"
+  );
+
+  const resultBytes = await contract.evaluateTransaction("GetDonor", donorId);
+
+  const resultJson = utf8Decoder.decode(resultBytes);
+  const donor = JSON.parse(resultJson);
+  console.log("*** Donor: ", donor);
+}
+
+export async function getDonation(
+  contract: Contract,
+  donationId: string
+): Promise<void> {
+  console.log(
+    "\n--> Evaluate Transaction: GetDonation, function returns the donation record with the provided ID"
+  );
+
+  const resultBytes = await contract.evaluateTransaction(
+    "GetDonation",
+    donationId
+  );
+
+  const resultJson = utf8Decoder.decode(resultBytes);
+  const donation = JSON.parse(resultJson);
+  console.log("*** Donation: ", donation);
 }
 
 /**
  * Submit a transaction synchronously, blocking until it has been committed to the ledger.
  */
-export async function createAsset(
+export async function createPatient(
   contract: Contract,
-  assetId: string
+  patientId: string,
+  age: number,
+  height: number,
+  bloodType: string,
+  pediatricStatus: string,
+  location: string,
+  meldScore: number,
+  hlaB27Antibodies: string
 ): Promise<void> {
   console.log(
-    "\n--> Submit Transaction: CreateAsset, creates new asset with ID, Color, Size, Owner and AppraisedValue arguments"
+    "\n--> Submit Transaction: CreatePatient, creates new patient record with provide details"
   );
 
   await contract.submitTransaction(
-    "CreateAsset",
-    assetId,
-    "yellow",
-    "5",
-    "Tom",
-    "1300"
+    "CreatePatient",
+    patientId,
+    age.toString(),
+    height.toString(),
+    bloodType,
+    pediatricStatus,
+    location,
+    meldScore.toString(),
+    hlaB27Antibodies
   );
 
-  console.log("*** Transaction committed successfully");
+  console.log(
+    "*** Transaction committed successfully for Patient ID: ",
+    patientId
+  );
 }
 
 /**
- * Submit transaction asynchronously, allowing the application to process the smart contract response (e.g. update a UI)
- * while waiting for the commit notification.
+ * Submit a transaction synchronously, blocking until it has been committed to the ledger.
  */
-export async function transferAssetAsync(contract: Contract): Promise<void> {
-  console.log(
-    "\n--> Async Submit Transaction: TransferAsset, updates existing asset owner"
-  );
-  const assetId = `asset${Date.now()}`;
-
-  const commit = await contract.submitAsync("TransferAsset", {
-    arguments: [assetId, "Saptha"],
-  });
-  const oldOwner = utf8Decoder.decode(commit.getResult());
-
-  console.log(
-    `*** Successfully submitted transaction to transfer ownership from ${oldOwner} to Saptha`
-  );
-  console.log("*** Waiting for transaction commit");
-
-  const status = await commit.getStatus();
-  if (!status.successful) {
-    throw new Error(
-      `Transaction ${status.transactionId} failed to commit with status code ${status.code}`
-    );
-  }
-
-  console.log("*** Transaction committed successfully");
-}
-
-export async function readAssetByID(
+export async function createDonor(
   contract: Contract,
-  assetId: string
+  donorId: string,
+  organ: string,
+  age: number,
+  height: number,
+  bloodType: string,
+  pediatricStatus: string,
+  location: string,
+  hlaB27AntigenTest: string
 ): Promise<void> {
   console.log(
-    "\n--> Evaluate Transaction: ReadAsset, function returns asset attributes"
+    "\n--> Submit Transaction: CreateDonor, creates new donor record with provide details"
   );
 
-  const resultBytes = await contract.evaluateTransaction("ReadAsset", assetId);
+  await contract.submitTransaction(
+    "CreateDonor",
+    donorId,
+    organ,
+    age.toString(),
+    height.toString(),
+    bloodType,
+    pediatricStatus,
+    location,
+    hlaB27AntigenTest
+  );
 
-  const resultJson = utf8Decoder.decode(resultBytes);
-  const result = JSON.parse(resultJson);
-  console.log("*** Result:", result);
+  console.log("*** Transaction committed successfully for Donor ID: ", donorId);
 }
 
-/**
- * submitTransaction() will throw an error containing details of any error responses from the smart contract.
- */
-export async function updateNonExistentAsset(
-  contract: Contract
+/*
+@Object()
+export class Donation {
+  @Property()
+  public docType: string;
+
+  @Property()
+  public donationId: string;
+
+  @Property()
+  public patientId: string;
+
+  @Property()
+  public donorId: string;
+}
+*/
+export async function createDonation(
+  contract: Contract,
+  donationId: string,
+  patientId: string,
+  donorId: string
 ): Promise<void> {
   console.log(
-    "\n--> Submit Transaction: UpdateAsset asset70, asset70 does not exist and should return an error"
+    "\n--> Submit Transaction: CreateDonation, creates new donation record with provide details"
   );
 
-  try {
-    await contract.submitTransaction(
-      "UpdateAsset",
-      "asset70",
-      "blue",
-      "5",
-      "Tomoko",
-      "300"
-    );
-    console.log("******** FAILED to return an error");
-  } catch (error) {
-    console.log("*** Successfully caught the error: \n", error);
-  }
+  await contract.submitTransaction(
+    "CreateDonation",
+    donationId,
+    patientId,
+    donorId
+  );
+
+  console.log(
+    "*** Transaction committed successfully for Donation ID: ",
+    donationId
+  );
+}
+
+export async function updateDonation(
+  contract: Contract,
+  donationId: string,
+  patientId: string,
+  donorId: string
+): Promise<void> {
+  console.log(
+    "\n--> Submit Transaction: UpdateDonation, updates the donation record with provide details"
+  );
+
+  await contract.submitTransaction(
+    "UpdateDonation",
+    donationId,
+    patientId,
+    donorId
+  );
+
+  console.log(
+    "*** Transaction committed successfully for Donation ID: ",
+    donationId
+  );
 }

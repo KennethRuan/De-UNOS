@@ -1,11 +1,16 @@
 import reflex as rx
+from frontend.components.transitions import fade_in
 
 
 def login():
     return rx.center(
-        rx.form(
+        rx.box(
             rx.vstack(
-                rx.heading("Sign in to our platform", size="7"),
+                rx.vstack(
+                    rx.heading("Sign in to our ", rx.text.em("platform"), size="7"),
+                    rx.text("Trusted by healthcare professionals around the world."),
+                    gap="12px",
+                ),
                 rx.box(
                     rx.text("Email"),
                     rx.input(name="email", variant="surface", size="3"),
@@ -13,7 +18,9 @@ def login():
                 ),
                 rx.box(
                     rx.text("Password"),
-                    rx.input(name="password", variant="surface", size="3"),
+                    rx.input(
+                        name="password", variant="surface", size="3", type="password"
+                    ),
                     width="100%",
                 ),
                 rx.spacer(),
@@ -31,10 +38,11 @@ def login():
             ),
             background_color="#FFFFFF66",
             border_radius="12px",
-            border="2px solid #FFFFFF99",
-            width="35%",
-            height="60%",
+            border="2px solid #FFFFFF80",
+            width="30%",
+            height="65%",
             display="flex",
+            style=fade_in,
         ),
         height="100vh",
     )
