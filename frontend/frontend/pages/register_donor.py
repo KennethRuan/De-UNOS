@@ -6,9 +6,13 @@ from requests import post
 
 class DonorState(rx.State):
     form_data: dict = {}
+    modal_open: bool = False
 
     def handle_submit(self, form_data: dict):
         self.form_data = form_data
+
+        if self.form_data["organ"] == "Kidney":
+            self.modal_open = True
         # after hitting submit button all data is in the form_data dictionary
         # can use this to add to blockchain
         data = post("http://localhost:3051/api/add-donor", json=form_data)
@@ -101,6 +105,23 @@ def register_donor():
                     # on_click=rx.redirect("/dashboard"),
                 ),
                 margin_top="48px",
+            ),
+            rx.dialog.root(
+                rx.dialog.content(
+                    rx.dialog.title("We've found a match!"),
+                    rx.dialog.description(
+                        "Your organ has been matched with a patient! A doctor will reach out soon with further instructions.",
+                    ),
+                    rx.hstack(
+                        rx.spacer(),
+                        rx.button(
+                            "Continue",
+                            on_click=rx.redirect("/dashboard"),
+                            margin_top="24px",
+                        ),
+                    ),
+                ),
+                open=DonorState.modal_open,
             ),
             on_submit=DonorState.handle_submit,
             style=fade_in,

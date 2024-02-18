@@ -34,9 +34,9 @@ app = rx.App(
         accent_color="blue",
     ),
 )
-app.add_page(landing, route="/")
-app.add_page(login)
-app.add_page(dashboard)
-app.add_page(register_patient, route="/register/patient")
-app.add_page(register_donor, route="/register/donor")
-app.add_page(data_table, route="/data-table")
+app.add_page(landing, route="/", title="De-UNOS")
+app.add_page(login, title="De-UNOS")
+app.add_page(dashboard, title="De-UNOS")
+app.add_page(register_patient, route="/register/patient", title="De-UNOS")
+app.add_page(register_donor, route="/register/donor", title="De-UNOS")
+app.add_page(data_table, route="/data-table", title="De-UNOS")

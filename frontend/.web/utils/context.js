@@ -1,17 +1,17 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
 import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "/utils/state.js"
 
-export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.iter_state": {"route": [{"name": "Home", "icon": "heart", "link": "/dashboard"}, {"name": "Register a patient", "icon": "heart", "link": "/register/patient"}, {"name": "Register a donor", "icon": "heart", "link": "/register/donor"}, {"name": "View Patients", "icon": "heart", "link": "/data-table"}]}, "state.data_state": {"data": [[]]}, "state.register_state": {"organ_inputted": false, "searched": false, "vitals": {}}, "state.donor_state": {"form_data": {}}}
+export const initialState = {"state": {"is_hydrated": false, "router": {"session": {"client_token": "", "client_ip": "", "session_id": ""}, "headers": {"host": "", "origin": "", "upgrade": "", "connection": "", "pragma": "", "cache_control": "", "user_agent": "", "sec_websocket_version": "", "sec_websocket_key": "", "sec_websocket_extensions": "", "accept_encoding": "", "accept_language": ""}, "page": {"host": "", "path": "", "raw_path": "", "full_path": "", "full_raw_path": "", "params": {}}}}, "state.register_state": {"organ_inputted": false, "searched": false, "vitals": {}}, "state.donor_state": {"form_data": {}, "modal_open": false}, "state.data_state": {"data": [[]]}, "state.iter_state": {"route": [{"name": "Home", "icon": "heart", "link": "/dashboard"}, {"name": "Register a patient", "icon": "heart", "link": "/register/patient"}, {"name": "Register a donor", "icon": "heart", "link": "/register/donor"}]}}
 
 export const ColorModeContext = createContext(null);
 export const UploadFilesContext = createContext(null);
 export const DispatchContext = createContext(null);
 export const StateContexts = {
   state: createContext(null),
-  state__iter_state: createContext(null),
-  state__data_state: createContext(null),
   state__register_state: createContext(null),
   state__donor_state: createContext(null),
+  state__data_state: createContext(null),
+  state__iter_state: createContext(null),
 }
 export const EventLoopContext = createContext(null);
 export const clientStorage = {"cookies": {}, "local_storage": {}}
@@ -55,33 +55,48 @@ export function EventLoopProvider({ children }) {
 
 export function StateProvider({ children }) {
   const [state, dispatch_state] = useReducer(applyDelta, initialState["state"])
-  const [state__iter_state, dispatch_state__iter_state] = useReducer(applyDelta, initialState["state.iter_state"])
-  const [state__data_state, dispatch_state__data_state] = useReducer(applyDelta, initialState["state.data_state"])
   const [state__register_state, dispatch_state__register_state] = useReducer(applyDelta, initialState["state.register_state"])
   const [state__donor_state, dispatch_state__donor_state] = useReducer(applyDelta, initialState["state.donor_state"])
+<<<<<<< HEAD
+=======
+  const [state__data_state, dispatch_state__data_state] = useReducer(applyDelta, initialState["state.data_state"])
+  const [state__iter_state, dispatch_state__iter_state] = useReducer(applyDelta, initialState["state.iter_state"])
+>>>>>>> 8bc24d6457fad1c885713b2ffd7a60cade4214e1
   const dispatchers = useMemo(() => {
     return {
       "state": dispatch_state,
-      "state.iter_state": dispatch_state__iter_state,
-      "state.data_state": dispatch_state__data_state,
       "state.register_state": dispatch_state__register_state,
       "state.donor_state": dispatch_state__donor_state,
+<<<<<<< HEAD
+=======
+      "state.data_state": dispatch_state__data_state,
+      "state.iter_state": dispatch_state__iter_state,
+>>>>>>> 8bc24d6457fad1c885713b2ffd7a60cade4214e1
     }
   }, [])
 
   return (
     <StateContexts.state.Provider value={ state }>
-    <StateContexts.state__iter_state.Provider value={ state__iter_state }>
-    <StateContexts.state__data_state.Provider value={ state__data_state }>
     <StateContexts.state__register_state.Provider value={ state__register_state }>
     <StateContexts.state__donor_state.Provider value={ state__donor_state }>
+<<<<<<< HEAD
       <DispatchContext.Provider value={dispatchers}>
         {children}
       </DispatchContext.Provider>
     </StateContexts.state__donor_state.Provider>
     </StateContexts.state__register_state.Provider>
     </StateContexts.state__data_state.Provider>
+=======
+    <StateContexts.state__data_state.Provider value={ state__data_state }>
+    <StateContexts.state__iter_state.Provider value={ state__iter_state }>
+      <DispatchContext.Provider value={dispatchers}>
+        {children}
+      </DispatchContext.Provider>
+>>>>>>> 8bc24d6457fad1c885713b2ffd7a60cade4214e1
     </StateContexts.state__iter_state.Provider>
+    </StateContexts.state__data_state.Provider>
+    </StateContexts.state__donor_state.Provider>
+    </StateContexts.state__register_state.Provider>
     </StateContexts.state.Provider>
   )
 }
