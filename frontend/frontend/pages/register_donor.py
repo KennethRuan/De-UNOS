@@ -3,9 +3,18 @@ from frontend.components.internal_template import internal_template
 from frontend.components.transitions import fade_in
 
 
+class DonorState(rx.State):
+    form_data: dict = {}
+
+    def handle_submit(self, form_data: dict):
+        self.form_data = form_data
+        # after hitting submit button all data is in the form_data dictionary
+        # can use this to add to blockchain
+
+
 def register_donor():
     return internal_template(
-        rx.scroll_area(
+        rx.form(
             rx.heading("Register a donor", margin_bottom="36px"),
             rx.vstack(
                 rx.box(
@@ -86,10 +95,12 @@ def register_donor():
                 rx.button(
                     "Confirm registration",
                     size="3",
-                    on_click=rx.redirect("/dashboard"),
+                    type="submit",
+                    # on_click=rx.redirect("/dashboard"),
                 ),
                 margin_top="48px",
             ),
+            on_submit=DonorState.handle_submit,
             style=fade_in,
         )
     )
