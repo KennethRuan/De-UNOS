@@ -3,6 +3,7 @@
 from frontend.pages.login import login
 from frontend.pages.dashboard import dashboard
 from frontend.pages.register_patient import register_patient
+from frontend.pages.data_table import data_table
 
 import reflex as rx
 

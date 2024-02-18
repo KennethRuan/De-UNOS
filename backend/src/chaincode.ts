@@ -19,7 +19,7 @@ export async function initLedger(contract: Contract): Promise<void> {
 /**
  * Evaluate a transaction to query ledger state.
  */
-export async function getAllPatients(contract: Contract): Promise<void> {
+export async function getAllPatients(contract: Contract): Promise<any[]> {
   console.log(
     "\n--> Evaluate Transaction: GetAllPatients, function returns all the patient records on the ledger"
   );
@@ -29,9 +29,10 @@ export async function getAllPatients(contract: Contract): Promise<void> {
   const resultJson = utf8Decoder.decode(resultBytes);
   const patients = JSON.parse(resultJson);
   console.log("*** All Patients: ", patients);
+  return patients;
 }
 
-export async function getAllDonors(contract: Contract): Promise<void> {
+export async function getAllDonors(contract: Contract): Promise<any[]> {
   console.log(
     "\n--> Evaluate Transaction: GetAllDonors, function returns all the organ donor on the ledger"
   );
@@ -41,33 +42,50 @@ export async function getAllDonors(contract: Contract): Promise<void> {
   const resultJson = utf8Decoder.decode(resultBytes);
   const donors = JSON.parse(resultJson);
   console.log("*** All Donors:", donors);
+  return donors;
 }
 
-export async function getAllDonations(contract: Contract, patientId: string): Promise<void> {
+export async function getAllDonations(
+  contract: Contract,
+  patientId: string
+): Promise<any[]> {
   console.log(
     "\n--> Evaluate Transaction: GetAllDonations, function returns all the donations received by the patient"
   );
 
-  const resultBytes = await contract.evaluateTransaction("GetAllDonations", patientId);
+  const resultBytes = await contract.evaluateTransaction(
+    "GetAllDonations",
+    patientId
+  );
 
   const resultJson = utf8Decoder.decode(resultBytes);
   const donations = JSON.parse(resultJson);
   console.log("*** All Donations: ", donations);
+  return donations;
 }
 
-export async function getPatient(contract: Contract, patientId: string): Promise<void> {
+export async function getPatient(
+  contract: Contract,
+  patientId: string
+): Promise<void> {
   console.log(
     "\n--> Evaluate Transaction: GetPatient, function returns the patient record with the provided ID"
   );
 
-  const resultBytes = await contract.evaluateTransaction("GetPatient", patientId);
+  const resultBytes = await contract.evaluateTransaction(
+    "GetPatient",
+    patientId
+  );
 
   const resultJson = utf8Decoder.decode(resultBytes);
   const patient = JSON.parse(resultJson);
   console.log("*** Patient: ", patient);
 }
 
-export async function getDonor(contract: Contract, donorId: string): Promise<void> {
+export async function getDonor(
+  contract: Contract,
+  donorId: string
+): Promise<void> {
   console.log(
     "\n--> Evaluate Transaction: GetDonor, function returns the donor record with the provided ID"
   );
@@ -79,12 +97,18 @@ export async function getDonor(contract: Contract, donorId: string): Promise<voi
   console.log("*** Donor: ", donor);
 }
 
-export async function getDonation(contract: Contract, donationId: string): Promise<void> {
+export async function getDonation(
+  contract: Contract,
+  donationId: string
+): Promise<void> {
   console.log(
     "\n--> Evaluate Transaction: GetDonation, function returns the donation record with the provided ID"
   );
 
-  const resultBytes = await contract.evaluateTransaction("GetDonation", donationId);
+  const resultBytes = await contract.evaluateTransaction(
+    "GetDonation",
+    donationId
+  );
 
   const resultJson = utf8Decoder.decode(resultBytes);
   const donation = JSON.parse(resultJson);
@@ -121,9 +145,11 @@ export async function createPatient(
     hlaB27Antibodies
   );
 
-  console.log("*** Transaction committed successfully for Patient ID: ", patientId);
+  console.log(
+    "*** Transaction committed successfully for Patient ID: ",
+    patientId
+  );
 }
-
 
 /**
  * Submit a transaction synchronously, blocking until it has been committed to the ledger.
@@ -191,7 +217,10 @@ export async function createDonation(
     donorId
   );
 
-  console.log("*** Transaction committed successfully for Donation ID: ", donationId);
+  console.log(
+    "*** Transaction committed successfully for Donation ID: ",
+    donationId
+  );
 }
 
 export async function updateDnoation(
@@ -211,5 +240,8 @@ export async function updateDnoation(
     donorId
   );
 
-  console.log("*** Transaction committed successfully for Donation ID: ", donationId);
+  console.log(
+    "*** Transaction committed successfully for Donation ID: ",
+    donationId
+  );
 }
