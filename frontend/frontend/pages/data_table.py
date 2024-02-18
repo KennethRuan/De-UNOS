@@ -9,7 +9,7 @@ class DataState(rx.State):
   data: list = [[]]
 
   def fetch_data(self):
-      resp = requests.get("http://localhost:2000/api/query-all-patients").json()
+      resp = requests.get("http://localhost:3051/api/query-all-patients").json()
       # Extract the patientId, organNeeded, age, height, bloodType, pediatricStatus, location, meldScore, hlaB27Antibodies and terraWearableId from each entry
       # self.data = [[entry.get("patientId"), entry.get("age"), entry.get("height"), entry.get("bloodType"), entry.get("pediatricStatus"), entry.get("location"), entry.get("meldScore"), entry.get("hlaB27Antibodies")] for entry in resp]
       self.data = [[getOrBlank(entry, "patientId"),getOrBlank(entry, "organNeeded"), getOrBlank(entry, "age"), getOrBlank(entry, "height"), getOrBlank(entry, "bloodType"), getOrBlank(entry, "pediatricStatus"), getOrBlank(entry, "location"), getOrBlank(entry, "meldScore"), getOrBlank(entry, "hlaB27Antibodies"), getOrBlank(entry, "terraWearableId")] for entry in resp]

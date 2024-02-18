@@ -7,6 +7,7 @@ class IterState(rx.State):
         {"name": "Home", "icon": "heart", "link": "/dashboard"},
         {"name": "Register a patient", "icon": "heart", "link": "/register/patient"},
         {"name": "Register a donor", "icon": "heart", "link": "/register/donor"},
+        {"name": "View Patients", "icon": "heart", "link": "/data-table"},
     ]
 
 
