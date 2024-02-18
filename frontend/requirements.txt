@@ -1,1 +1,6 @@
 reflex==0.4.0
+terra-python
+requests
+datetime
+argparse
+
