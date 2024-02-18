@@ -9,7 +9,7 @@ style = {
     "transition": "color .3s ease-in-out, box-shadow .3s ease-in-out",
     "animation": "floating 4s ease-in-out infinite",
     ":hover": {
-        "box_shadow": "inset 750px 0 0 0 #0090FF",
+        "box_shadow": "inset 1000px 0 0 0 #0090FF",
         "color": "white",
         "cursor": "default",
     },
@@ -23,7 +23,7 @@ style = {
 def landing():
     return rx.center(
         rx.vstack(
-            rx.heading("give me your organs.", style=style),
+            rx.heading("empower hearts with de-unos.", style=style),
             rx.button(
                 "Be part of a world where organ transplants are easier than ever.",
                 size="3",

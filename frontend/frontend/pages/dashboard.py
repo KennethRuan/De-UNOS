@@ -2,12 +2,7 @@ import reflex as rx
 from frontend.components.internal_template import internal_template
 from reflex.style import Style
 import json
-import pandas as pd
-import plotly.graph_objects as go
-import plotly.express as px
-from plotly.io import to_json
-import random
-from geopy.geocoders import Nominatim
+
 
 class LeafletLib(rx.Component):
     def _get_imports(self):
@@ -37,6 +32,7 @@ class LeafletLib(rx.Component):
         out = super()._render()
         return out.add_props(style=self.custom_style).remove_props("custom_style")
 
+
 class MapContainer(LeafletLib):
     library = "react-leaflet"
     tag = "MapContainer"
@@ -51,6 +47,7 @@ class MapContainer(LeafletLib):
                 const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
                 """
 
+
 class TileLayer(LeafletLib):
     library = "react-leaflet"
     tag = "TileLayer"
@@ -60,6 +57,7 @@ class TileLayer(LeafletLib):
 
     attribution: rx.Var[str]
     url: rx.Var[str]
+
 
 class Marker(LeafletLib):
     library = "react-leaflet"
@@ -79,6 +77,7 @@ class Popup(LeafletLib):
     def _get_custom_code(self) -> str:
         return """const Popup = dynamic(() => import('react-leaflet').then((mod) => mod.Popup), { ssr: false });"""
 
+
 class Circle(LeafletLib):
     library = "react-leaflet"
     tag = "Circle"
@@ -90,9 +89,11 @@ class Circle(LeafletLib):
     radius: rx.Var[int]  # Radius of the circle in meters
     path_options: rx.Var[dict]  # Options for the circle path
 
+
 class UseMap(LeafletLib):
     library = "react-leaflet"
     tag = "useMap"
+
 
 map_container = MapContainer.create
 tile_layer = TileLayer.create
@@ -101,37 +102,38 @@ marker = Marker.create
 popup = Popup.create
 circle = Circle.create
 
+
 def dashboard():
     patients = [
-        [40.7128, -74.0060],   # New York City
+        [40.7128, -74.0060],  # New York City
         [34.0522, -118.2437],  # Los Angeles
-        [41.8781, -87.6298],   # Chicago
-        [29.7604, -95.3698],   # Houston
+        [41.8781, -87.6298],  # Chicago
+        [29.7604, -95.3698],  # Houston
         [33.4484, -112.0740],  # Phoenix
-        [39.9526, -75.1652],   # Philadelphia
-        [29.4241, -98.4936],   # San Antonio
+        [39.9526, -75.1652],  # Philadelphia
+        [29.4241, -98.4936],  # San Antonio
         [32.7157, -117.1611],  # San Diego
-        [32.7767, -96.7970],   # Dallas
+        [32.7767, -96.7970],  # Dallas
         [37.3382, -121.8863],  # San Jose
-        [30.2672, -97.7431],   # Austin
-        [30.3322, -81.6557],   # Jacksonville
+        [30.2672, -97.7431],  # Austin
+        [30.3322, -81.6557],  # Jacksonville
         [37.7749, -122.4194],  # San Francisco
-        [39.7684, -86.1581],   # Indianapolis
-        [39.9612, -82.9988],   # Columbus
-        [32.7555, -97.3308],   # Fort Worth
-        [35.2271, -80.8431],   # Charlotte
+        [39.7684, -86.1581],  # Indianapolis
+        [39.9612, -82.9988],  # Columbus
+        [32.7555, -97.3308],  # Fort Worth
+        [35.2271, -80.8431],  # Charlotte
         [47.6062, -122.3321],  # Seattle
         [39.7392, -104.9903],  # Denver
-        [38.9072, -77.0369],   # Washington
-        [42.3601, -71.0589],   # Boston
+        [38.9072, -77.0369],  # Washington
+        [42.3601, -71.0589],  # Boston
         [31.7619, -106.4850],  # El Paso
-        [36.1627, -86.7816],   # Nashville
-        [42.3314, -83.0458],   # Detroit
-        [35.4676, -97.5164],   # Oklahoma City
+        [36.1627, -86.7816],  # Nashville
+        [42.3314, -83.0458],  # Detroit
+        [35.4676, -97.5164],  # Oklahoma City
         [45.5051, -122.6750],  # Portland
         [36.1699, -115.1398],  # Las Vegas
-        [35.1495, -90.0490],   # Memphis
-        [38.2527, -85.7585],   # Louisville
+        [35.1495, -90.0490],  # Memphis
+        [38.2527, -85.7585],  # Louisville
         [40.7128, -74.0060],
         [34.0522, -118.2437],
         [41.8781, -87.6298],
@@ -195,7 +197,7 @@ def dashboard():
         [37.7749, -122.4194],  # San Francisco
         [39.7684, -86.1581],  # Indianapolis
         [47.6062, -122.3321],  # Seattle
-         [37.3382, -121.8863],  # San Jose
+        [37.3382, -121.8863],  # San Jose
         [30.2672, -97.7431],  # Austin
         [30.3322, -81.6557],  # Jacksonville
         [32.7555, -97.3308],  # Fort Worth
@@ -221,8 +223,7 @@ def dashboard():
     ]
 
     circles = [
-        circle(center=p, radius=10000, path_options={'color': 'blue'})
-        for p in patients
+        circle(center=p, radius=10000, path_options={"color": "blue"}) for p in patients
     ]
 
     return internal_template(
@@ -239,6 +240,7 @@ def dashboard():
             width="100%",
         ),
     )
+
 
 # class State(rx.State):
 #     us_cities = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
@@ -265,4 +267,3 @@ def dashboard():
 #         # rx.color_mode_button(rx.color_mode_icon(), float="right"),
 #         rx.plotly(data=State.fig_map, layout=State.fig_layout),
 #     )
-
