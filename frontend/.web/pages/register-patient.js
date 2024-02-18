@@ -13,6 +13,30 @@ import NextHead from "next/head"
 
 
 
+export function Button_42d2aea9f63703f0d45143d9c19ad3e8 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_e3d9cdf370b7582c49aec65130296d47 = useCallback((_e) => addEvents([Event("state.register_state.search", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_e3d9cdf370b7582c49aec65130296d47}>
+  {`Search`}
+</RadixThemesButton>
+  )
+}
+
+export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_2fd35f581ac6d709ce2966c88c7c5818 = useCallback((_e) => addEvents([Event("_redirect", {path:`/login`,external:false})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_2fd35f581ac6d709ce2966c88c7c5818} size={`3`} variant={`soft`}>
+  {`Log out`}
+</RadixThemesButton>
+  )
+}
+
 export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
@@ -42,19 +66,24 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
+export function Box_256c1763cb0cbb9fa31f072c748f92c3 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
+  const state__iter_state = useContext(StateContexts.state__iter_state)
 
-  const on_click_2fd35f581ac6d709ce2966c88c7c5818 = useCallback((_e) => addEvents([Event("_redirect", {path:`/login`,external:false})], (_e), {}), [addEvents, Event])
 
   return (
-    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_2fd35f581ac6d709ce2966c88c7c5818} size={`3`} variant={`soft`}>
-  {`Log out`}
-</RadixThemesButton>
+    <RadixThemesBox css={{"width": "100%"}}>
+  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
+  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
+  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
+  {route["name"]}
+</RadixThemesBox>
+))}
+</RadixThemesBox>
   )
 }
 
-export function Fragment_94f0d2946a0fd64a5afd3e5ad8c6aeb5 () {
+export function Fragment_342ff852e8325d19c704d625f1887b88 () {
   const state__register_state = useContext(StateContexts.state__register_state)
 
 
@@ -68,7 +97,7 @@ export function Fragment_94f0d2946a0fd64a5afd3e5ad8c6aeb5 () {
 </RadixThemesText>
   <RadixThemesTable.Root css={{"width": "50%"}}>
   <RadixThemesTable.Body>
-  {Object.entries({"Age": 20, "Height": "152 cm", "Blood Type": "A", "Pediatric Status": "No", "Location": "Toronto, Canada", "Medical Urgency": 14, "HLA-B27 Antibodies": "Positive"}).map((data, index_2b12b2927cea2a6931ab22f742f79862) => (
+  {Object.entries({"Patient ID:": "0f0327a7-9e4f", "Age": 20, "Height (cm)": 152, "Blood Type": "A", "Pediatric Status": "No", "Location": "Houston, Texas", "MELD Score": 14, "HLA-B27 Antibodies": "Positive", "Terra Wearable ID": "b844c120-288e-43b1-9c5b-3a40a3c0056a"}).map((data, index_2b12b2927cea2a6931ab22f742f79862) => (
   <RadixThemesTable.Row key={index_2b12b2927cea2a6931ab22f742f79862}>
   <RadixThemesTable.ColumnHeaderCell>
   {data[0]}
@@ -89,35 +118,6 @@ export function Fragment_94f0d2946a0fd64a5afd3e5ad8c6aeb5 () {
   )
 }
 
-export function Box_df017b05ddba99075cca6ec4353bfd33 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-  const state__iter_state = useContext(StateContexts.state__iter_state)
-
-
-  return (
-    <RadixThemesBox css={{"width": "100%"}}>
-  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
-  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
-  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
-  {route["name"]}
-</RadixThemesBox>
-))}
-</RadixThemesBox>
-  )
-}
-
-export function Button_42d2aea9f63703f0d45143d9c19ad3e8 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_e3d9cdf370b7582c49aec65130296d47 = useCallback((_e) => addEvents([Event("state.register_state.search", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_e3d9cdf370b7582c49aec65130296d47}>
-  {`Search`}
-</RadixThemesButton>
-  )
-}
-
 export default function Component() {
 
   return (
@@ -134,7 +134,7 @@ export default function Component() {
   <RadixThemesAvatar fallback={`RX`} radius={`full`} src={`/avatar.png`} variant={`solid`}/>
   {`Organ Donor`}
 </RadixThemesBox>
-  <Box_df017b05ddba99075cca6ec4353bfd33/>
+  <Box_256c1763cb0cbb9fa31f072c748f92c3/>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <Button_fdfb9abde1a99e327c82452dc6a3dd0c/>
 </RadixThemesFlex>
@@ -155,7 +155,7 @@ export default function Component() {
 </RadixThemesBox>
   <Button_42d2aea9f63703f0d45143d9c19ad3e8/>
 </RadixThemesFlex>
-  <Fragment_94f0d2946a0fd64a5afd3e5ad8c6aeb5/>
+  <Fragment_342ff852e8325d19c704d625f1887b88/>
 </RadixThemesBox>
 </RadixThemesBox>
 </RadixThemesBox>

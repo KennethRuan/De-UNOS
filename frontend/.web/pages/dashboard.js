@@ -13,20 +13,15 @@ import NextHead from "next/head"
 
 
 
-export function Box_df017b05ddba99075cca6ec4353bfd33 () {
+export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
   const [addEvents, connectError] = useContext(EventLoopContext);
-  const state__iter_state = useContext(StateContexts.state__iter_state)
 
+  const on_click_2fd35f581ac6d709ce2966c88c7c5818 = useCallback((_e) => addEvents([Event("_redirect", {path:`/login`,external:false})], (_e), {}), [addEvents, Event])
 
   return (
-    <RadixThemesBox css={{"width": "100%"}}>
-  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
-  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
-  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
-  {route["name"]}
-</RadixThemesBox>
-))}
-</RadixThemesBox>
+    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_2fd35f581ac6d709ce2966c88c7c5818} size={`3`} variant={`soft`}>
+  {`Log out`}
+</RadixThemesButton>
   )
 }
 
@@ -59,15 +54,20 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
+export function Box_256c1763cb0cbb9fa31f072c748f92c3 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
+  const state__iter_state = useContext(StateContexts.state__iter_state)
 
-  const on_click_2fd35f581ac6d709ce2966c88c7c5818 = useCallback((_e) => addEvents([Event("_redirect", {path:`/login`,external:false})], (_e), {}), [addEvents, Event])
 
   return (
-    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_2fd35f581ac6d709ce2966c88c7c5818} size={`3`} variant={`soft`}>
-  {`Log out`}
-</RadixThemesButton>
+    <RadixThemesBox css={{"width": "100%"}}>
+  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
+  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
+  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
+  {route["name"]}
+</RadixThemesBox>
+))}
+</RadixThemesBox>
   )
 }
 
@@ -87,7 +87,7 @@ export default function Component() {
   <RadixThemesAvatar fallback={`RX`} radius={`full`} src={`/avatar.png`} variant={`solid`}/>
   {`Organ Donor`}
 </RadixThemesBox>
-  <Box_df017b05ddba99075cca6ec4353bfd33/>
+  <Box_256c1763cb0cbb9fa31f072c748f92c3/>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <Button_fdfb9abde1a99e327c82452dc6a3dd0c/>
 </RadixThemesFlex>

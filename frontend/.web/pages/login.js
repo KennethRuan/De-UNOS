@@ -11,18 +11,6 @@ import NextHead from "next/head"
 
 
 
-export function Button_f143a763019a11a5eb4039c4de0240e2 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_9399c150f17bad15b5c1b37eeea9341f = useCallback((_e) => addEvents([Event("_redirect", {path:`/dashboard`,external:false})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_9399c150f17bad15b5c1b37eeea9341f} size={`3`} type={`submit`}>
-  {`Submit`}
-</RadixThemesButton>
-  )
-}
-
 export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   const [addEvents, connectError] = useContext(EventLoopContext);
 
@@ -49,6 +37,18 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   <Fragment/>
 )}
 </Fragment>
+  )
+}
+
+export function Button_f143a763019a11a5eb4039c4de0240e2 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_9399c150f17bad15b5c1b37eeea9341f = useCallback((_e) => addEvents([Event("_redirect", {path:`/dashboard`,external:false})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton css={{"width": "100%"}} onClick={on_click_9399c150f17bad15b5c1b37eeea9341f} size={`3`} type={`submit`}>
+  {`Submit`}
+</RadixThemesButton>
   )
 }
 
