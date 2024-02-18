@@ -15,6 +15,7 @@ def internal_template(page_content) -> rx.Component:
             rx.box(
                 page_content,
                 width="80%",
+                height="100%",
                 padding="48px 36px",
             ),
             background_color="#FFFFFF66",

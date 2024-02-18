@@ -12,6 +12,28 @@ import { HeartIcon as LucideHeartIcon } from "lucide-react"
 import NextHead from "next/head"
 
 
+import "leaflet/dist/leaflet.css";
+                import dynamic from 'next/dynamic'
+                const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), { ssr: false });
+                
+
+export function Box_d85398544b6feb6d9df4aff43b3bf781 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+  const state__iter_state = useContext(StateContexts.state__iter_state)
+
+
+  return (
+    <RadixThemesBox css={{"width": "100%"}}>
+  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
+  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
+  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
+  {route["name"]}
+</RadixThemesBox>
+))}
+</RadixThemesBox>
+  )
+}
+const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), { ssr: false });
 
 export function Button_fdfb9abde1a99e327c82452dc6a3dd0c () {
   const [addEvents, connectError] = useContext(EventLoopContext);
@@ -54,23 +76,6 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   )
 }
 
-export function Box_256c1763cb0cbb9fa31f072c748f92c3 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-  const state__iter_state = useContext(StateContexts.state__iter_state)
-
-
-  return (
-    <RadixThemesBox css={{"width": "100%"}}>
-  {state__iter_state.route.map((route, index_91bcef38547e506e891a624bdedb9573) => (
-  <RadixThemesBox css={{"&:hover": {"backgroundColor": "#0090FF66", "cursor": "pointer"}, "width": "100%", "height": "48px", "padding": "0 8px", "display": "flex", "gap": "12px", "alignItems": "center", "borderRadius": "8px"}} key={index_91bcef38547e506e891a624bdedb9573} onClick={(_e) => addEvents([Event("_redirect", {path:route["link"],external:false})], (_e), {})}>
-  <LucideHeartIcon css={{"color": "var(--current-color)"}}/>
-  {route["name"]}
-</RadixThemesBox>
-))}
-</RadixThemesBox>
-  )
-}
-
 export default function Component() {
 
   return (
@@ -87,15 +92,15 @@ export default function Component() {
   <RadixThemesAvatar fallback={`RX`} radius={`full`} src={`/avatar.png`} variant={`solid`}/>
   {`Organ Donor`}
 </RadixThemesBox>
-  <Box_256c1763cb0cbb9fa31f072c748f92c3/>
+  <Box_d85398544b6feb6d9df4aff43b3bf781/>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <Button_fdfb9abde1a99e327c82452dc6a3dd0c/>
 </RadixThemesFlex>
 </RadixThemesBox>
-  <RadixThemesBox css={{"width": "80%", "padding": "48px 36px"}}>
-  <RadixThemesHeading css={{"fontFamily": "Montserrat", "fontWeight": "bold"}}>
-  {`Welcome, Hospital`}
-</RadixThemesHeading>
+  <RadixThemesBox css={{"width": "80%", "height": "100%", "padding": "48px 36px"}}>
+  <MapContainer center={[37.42823, -122.168861]} css={{"height": "100%", "width": "100%", "customStyle": {"height": "100%", "width": "100%"}}} scrollWheelZoom={true} style={{"height": "100%", "width": "100%"}} zoom={13}>
+  <TileLayer attribution={`&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors`} css={{"customStyle": null}} url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`}/>
+</MapContainer>
 </RadixThemesBox>
 </RadixThemesBox>
 </RadixThemesFlex>
