@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { connectToGateway } from "./gateway";
-import { createAsset } from "./chaincode";
+import { createAsset, getAllAssets } from "./chaincode";
 
 const app = express();
 app.use(express.json());
@@ -23,8 +23,17 @@ app.post("/api/add-patient", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/api/query-all-patients", (req: Request, res: Response) => {
+app.get("/api/query-all-patients", async (req: Request, res: Response) => {
   res.send("Query All Patients");
+  const { client, gateway, network, contract } = await connectToGateway();
+  try {
+    const data = await getAllAssets(contract);
+    console.log("Success", data);
+    res.send(data);
+  } finally {
+    gateway.close();
+    client.close();
+  }
 });
 
 app.get("/api/query-patient/:id", (req: Request, res: Response) => {
