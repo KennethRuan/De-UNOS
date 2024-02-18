@@ -2,4 +2,4 @@
 A decentralized hyperledger blockchain approach to managing organ donations and transplants.
 
 
-![alt text](assets\image3.png)
+![alt text](assets/image3.png)
