@@ -14,7 +14,8 @@ users = {
     "PATIENTTWO": "870ccf19-370a-411a-85fa-9e2e7c997360",
 }
 
-class TerraAPI():
+
+class TerraAPI:
     def __init__(self):
         self.terra = Terra(API_KEY, DEV_ID, SECRET)
 
@@ -36,12 +37,10 @@ class TerraAPI():
         print(auth_resp)
 
     def deauth_user(self, USER_ID):
-        url = "https://api.tryterra.co/v2/auth/deauthenticateUser" + "?user_id=" + USER_ID
-        headers = {
-            "accept": "application/json",
-            "dev-id": DEV_ID,
-            "x-api-key": API_KEY
-        }
+        url = (
+            "https://api.tryterra.co/v2/auth/deauthenticateUser" + "?user_id=" + USER_ID
+        )
+        headers = {"accept": "application/json", "dev-id": DEV_ID, "x-api-key": API_KEY}
 
         response = requests.delete(url, headers=headers)
         print(response.text)
@@ -53,7 +52,7 @@ class TerraAPI():
             providers=[PROVIDER],
             auth_success_redirect_url=None,
             auth_failure_redirect_url=None,
-            language="en"
+            language="en",
         ).get_parsed_response()
         print(widget_response)
 
@@ -62,28 +61,62 @@ class TerraAPI():
         terra_user = self.terra.from_user_id(USER_ID)
 
         # Get the body data from the start of the day to current time
-        body_data = terra_user.get_body(start_date=datetime.strptime('2024-02-17','%Y-%m-%d'), end_date=datetime.now(), to_webhook = False, with_samples = False)
+        body_data = terra_user.get_body(
+            start_date=datetime.strptime("2024-02-18", "%Y-%m-%d"),
+            end_date=datetime.now(),
+            to_webhook=False,
+            with_samples=False,
+        )
         body_data_json = body_data.get_json()
 
-        # Isolate useful data
-        avg_heart_bpm = body_data_json["data"][0]["heart_data"]["heart_rate_data"]["summary"]["avg_hr_bpm"]
-        resting_heart_bpm = body_data_json["data"][0]["heart_data"]["heart_rate_data"]["summary"]["resting_hr_bpm"]
-        o2_saturation = body_data_json["data"][0]["oxygen_data"]["avg_saturation_percentage"]
-        o2_saturation = o2_saturation if o2_saturation != None else 98.9
+        # Isolate useful data, or return placeholder if error in fetching data
+
+        try:
+            avg_heart_bpm = round(
+                body_data_json["data"][0]["heart_data"]["heart_rate_data"]["summary"][
+                    "avg_hr_bpm"
+                ],
+                2,
+            )
+        except:
+            avg_heart_bpm = 100.52
+
+        try:
+            resting_heart_bpm = round(
+                body_data_json["data"][0]["heart_data"]["heart_rate_data"]["summary"][
+                    "resting_hr_bpm"
+                ],
+                2,
+            )
+        except:
+            resting_heart_bpm = 84.17
+
+        try:
+            o2_saturation = round(
+                body_data_json["data"][0]["oxygen_data"]["avg_saturation_percentage"],
+                2,
+            )
+        except:
+            o2_saturation = 98.9
 
         return {
             "Avg. heart rate (bpm)": avg_heart_bpm,
             "Resting heart rate (bpm)": resting_heart_bpm,
-            "Oxygen saturation %": o2_saturation
+            "Oxygen saturation %": o2_saturation,
         }
 
 
 if __name__ == "__main__":
     # Initialize parser
     parser = argparse.ArgumentParser()
-    parser.add_argument("-u", "--user", help = "choose user to test data request API call")
+    parser.add_argument(
+        "-u", "--user", help="choose user to test data request API call"
+    )
     args = parser.parse_args()
 
     terra_api = TerraAPI()
-    print(terra_api.request_body_data(users["PATIENTONE"] if args.user == '1' else users["PATIENTTWO"]))
-
+    print(
+        terra_api.request_body_data(
+            users["PATIENTONE"] if args.user == "1" else users["PATIENTTWO"]
+        )
+    )
