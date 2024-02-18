@@ -2,6 +2,7 @@
 
 from frontend.pages.login import login
 from frontend.pages.dashboard import dashboard
+from frontend.pages.register_patient import register_patient
 
 import reflex as rx
 
@@ -36,3 +37,4 @@ app = rx.App(
 app.add_page(index)
 app.add_page(login)
 app.add_page(dashboard)
+app.add_page(register_patient, route="/register-patient")

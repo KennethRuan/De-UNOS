@@ -8,14 +8,14 @@ def internal_template(page_content) -> rx.Component:
             rx.box(
                 sidebar(),
                 background_color="white",
-                width="20%",
-                border_radius="12px 0 0 12px",
-                padding="24px",
+                width="25%",
+                border_radius="10px 0 0 10px",
+                padding="36px",
             ),
             rx.box(
                 page_content,
                 width="80%",
-                padding="24px",
+                padding="48px 36px",
             ),
             background_color="#FFFFFF66",
             border_radius="12px",
