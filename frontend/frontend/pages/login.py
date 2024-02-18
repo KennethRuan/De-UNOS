@@ -5,7 +5,11 @@ def login():
     return rx.center(
         rx.box(
             rx.vstack(
-                rx.heading("Sign in to our platform", size="7"),
+                rx.vstack(
+                    rx.heading("Sign in to our ", rx.text.em("platform"), size="7"),
+                    rx.text("Trusted by healthcare professionals around the world."),
+                    gap="12px",
+                ),
                 rx.box(
                     rx.text("Email"),
                     rx.input(name="email", variant="surface", size="3"),
@@ -31,9 +35,9 @@ def login():
             ),
             background_color="#FFFFFF66",
             border_radius="12px",
-            border="2px solid #FFFFFF99",
-            width="35%",
-            height="60%",
+            border="2px solid #FFFFFF80",
+            width="30%",
+            height="65%",
             display="flex",
         ),
         height="100vh",

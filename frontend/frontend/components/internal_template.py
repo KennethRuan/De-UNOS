@@ -19,7 +19,7 @@ def internal_template(page_content) -> rx.Component:
             ),
             background_color="#FFFFFF66",
             border_radius="12px",
-            border="2px solid #FFFFFF99",
+            border="2px solid #FFFFFF80",
             width="80%",
             height="80%",
             display="flex",
