@@ -7,13 +7,24 @@
     "prod": "next start"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@chakra-ui/react": "^2.6.1",
+    "@chakra-ui/system": "^2.5.7",
+=======
     "@chakra-ui/react": "2.6.1",
     "@chakra-ui/system": "2.5.7",
+>>>>>>> main
     "@emotion/react": "^11.11.1",
     "@glideapps/glide-data-grid": "^5.3.0",
     "@radix-ui/react-form": "^0.0.3",
     "@radix-ui/themes": "^2.0.0",
     "axios": "1.4.0",
+<<<<<<< HEAD
+    "framer-motion": "^10.16.4",
+    "json5": "2.2.3",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.314.0",
+=======
     "framer-motion": "10.16.4",
     "gridjs": "6.0.6",
     "gridjs-react": "6.0.1",
@@ -21,13 +32,20 @@
     "lodash": "^4.17.21",
     "lucide-react": "0.314.0",
     "marked": "^4.0.10",
+>>>>>>> main
     "next": "14.0.1",
     "next-sitemap": "4.1.8",
     "next-themes": "0.2.0",
+    "plotly.js": "^2.22.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+<<<<<<< HEAD
+    "react-leaflet": "^4.2.1",
+    "react-plotly.js": "^2.6.0",
+=======
     "react-responsive-carousel": "^3.2.7",
     "silly": "^0.2.0",
+>>>>>>> main
     "socket.io-client": "4.6.1",
     "universal-cookie": "4.0.4"
   },
