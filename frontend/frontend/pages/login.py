@@ -3,7 +3,7 @@ import reflex as rx
 
 def login():
     return rx.center(
-        rx.form(
+        rx.box(
             rx.vstack(
                 rx.heading("Sign in to our platform", size="7"),
                 rx.box(
