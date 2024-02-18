@@ -1,0 +1,26 @@
+import json
+
+data = [
+	{
+        "Organ": "Liver",
+		"Donor Age": 20,
+		"Donor Height (cm)": 164,
+		"Blood Type": "A",
+		"Pediatric Status": "No",
+		"Location": "Dallas, Texas",
+		"HLA-B27 Antigen Test": "Positive"
+	},
+	{
+        "Organ": "Heart",
+		"Age": 56,
+		"Height (cm)": 175,
+		"Blood Type": "O",
+		"Pediatric Status": "No",
+		"Location": "Boston, Massachusetts",
+		"HLA-B27 Antigen Test": "Positive"
+	}
+]
+
+with open("organ.json", "w") as file:
+    json.dump(data, file)
+

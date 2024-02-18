@@ -2,7 +2,6 @@ import reflex as rx
 from frontend.components.internal_template import internal_template
 from frontend.data.patient_data import data
 
-
 class RegisterState(rx.State):
     searched: bool = False
     organ_inputted: bool = False
