@@ -1,5 +1,6 @@
 import reflex as rx
 from frontend.components.internal_template import internal_template
+from frontend.components.transitions import fade_in
 from frontend.data.patient_data import patient_data
 from frontend.terra.API import TerraAPI
 
@@ -146,5 +147,6 @@ def register_patient():
             ),
             type="scroll",
             scrollbars="vertical",
+            style=fade_in,
         )
     )

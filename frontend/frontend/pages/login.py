@@ -1,4 +1,5 @@
 import reflex as rx
+from frontend.components.transitions import fade_in
 
 
 def login():
@@ -17,7 +18,9 @@ def login():
                 ),
                 rx.box(
                     rx.text("Password"),
-                    rx.input(name="password", variant="surface", size="3"),
+                    rx.input(
+                        name="password", variant="surface", size="3", type="password"
+                    ),
                     width="100%",
                 ),
                 rx.spacer(),
@@ -39,6 +42,7 @@ def login():
             width="30%",
             height="65%",
             display="flex",
+            style=fade_in,
         ),
         height="100vh",
     )

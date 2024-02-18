@@ -4,6 +4,7 @@ from frontend.pages.landing import landing
 from frontend.pages.login import login
 from frontend.pages.dashboard import dashboard
 from frontend.pages.register_patient import register_patient
+from frontend.pages.register_donor import register_donor
 
 import reflex as rx
 
@@ -35,4 +36,5 @@ app = rx.App(
 app.add_page(landing, route="/")
 app.add_page(login)
 app.add_page(dashboard)
-app.add_page(register_patient, route="/register-patient")
+app.add_page(register_patient, route="/register/patient")
+app.add_page(register_donor, route="/register/donor")
