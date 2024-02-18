@@ -1,22 +1,35 @@
 import reflex as rx
 from frontend.components.internal_template import internal_template
-from frontend.data.patient_data import data
+from frontend.components.transitions import fade_in
+from frontend.data.patient_data import patient_data
+from frontend.terra.API import TerraAPI
+
 
 class RegisterState(rx.State):
     searched: bool = False
     organ_inputted: bool = False
+    vitals: dict = {}
 
     def search(self):
         self.searched = True
 
     def input_organ(self):
         self.organ_inputted = True
+        terra_api = TerraAPI()
+        self.vitals = terra_api.request_body_data(patient_data[9]["Terra Wearable ID"])
 
 
-def patient_table(data):
+def patient_table(info):
     return rx.table.row(
-        rx.table.column_header_cell(data[0]),
-        rx.table.cell(data[1]),
+        rx.table.column_header_cell(info[0]),
+        rx.table.cell(info[1]),
+    )
+
+
+def patient_vitals(info):
+    return rx.chakra.stat(
+        rx.chakra.stat_label(info[0]),
+        rx.chakra.stat_number(info[1]),
     )
 
 
@@ -94,7 +107,7 @@ def register_patient():
                                 rx.table.root(
                                     rx.table.body(
                                         rx.foreach(
-                                            data[
+                                            patient_data[
                                                 0
                                             ],  # TODO: function to change whose data shows up
                                             patient_table,
@@ -110,12 +123,23 @@ def register_patient():
                             rx.text(
                                 "Please review patient vitals before proceeding.",
                                 margin_top="24px",
-                                margin_bottom="12px",
+                                margin_bottom="24px",
                             ),
-                            rx.chakra.stat(
-                                rx.chakra.stat_label("Example Stat"),
-                                rx.chakra.stat_number("100 bpm"),
-                                rx.chakra.stat_help_text("Description"),
+                            rx.hstack(
+                                rx.foreach(
+                                    RegisterState.vitals,
+                                    patient_vitals,
+                                ),
+                                justify="between",
+                            ),
+                            rx.hstack(
+                                rx.spacer(),
+                                rx.button(
+                                    "Confirm registration",
+                                    size="3",
+                                    on_click=rx.redirect("/dashboard"),
+                                ),
+                                margin_top="48px",
                             ),
                         ),
                     ),
@@ -123,5 +147,6 @@ def register_patient():
             ),
             type="scroll",
             scrollbars="vertical",
+            style=fade_in,
         )
     )

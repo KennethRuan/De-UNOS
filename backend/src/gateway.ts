@@ -21,7 +21,6 @@ const cryptoPath = envOrDefault(
     __dirname,
     "..",
     "..",
-    "..",
     "test-network",
     "organizations",
     "peerOrganizations",
@@ -44,7 +43,7 @@ const certPath = envOrDefault(
     "User1@org1.example.com",
     "msp",
     "signcerts",
-    "cert.pem"
+    "User1@org1.example.com-cert.pem"
   )
 );
 
